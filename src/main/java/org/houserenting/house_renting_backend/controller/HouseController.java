@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/houses")
+@RequestMapping("/api/houses") // Changed from /houses to /api/houses
+@CrossOrigin(origins = "*")
 public class HouseController {
 
     @Autowired
@@ -34,6 +35,8 @@ public class HouseController {
             houseService.createHouse(house);
             return ResponseEntity.status(HttpStatus.CREATED).body(house);
         } catch (Exception e) {
+            // Add logging for better debugging
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
